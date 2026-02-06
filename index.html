@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Mariam ❤️</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<audio id="music" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="hearts"></div>
+
+<!-- LOCK SCREEN -->
+<div class="container glow" id="lock">
+  <h1>🔐 Secret Access</h1>
+  <p class="mystery-text">
+    This surprise belongs to one heart only...<br>
+    If it's yours, you'll know the code 💖
+  </p>
+
+  <input type="password" id="pass" placeholder="Enter the secret code">
+  <button onclick="checkPass()">Unlock 💌</button>
+
+  <p id="error"></p>
+  <p id="hint" class="hidden hint">
+    💡 Hint: Think of the day the world became brighter 🎂
+  </p>
+</div>
+
+<!-- SURPRISE -->
+<div class="container glow hidden" id="surprise">
+  <img src="photo.jpg" alt="Mariam">
+
+  <h2 class="valentine-text">Happy Valentine’s Day Sweetie ❤️</h2>
+
+  <button onclick="showLetter()">Read My Heart 💖</button>
+
+  <div class="letter hidden" id="letter">
+    <p class="love-text">
+
+      عدا على وجودنا مع بعض سنتين يروح قلبي، تاني عيد فالنتاين واحنا مع بعض يروحي،
+      ومن أول لحظة دخلتي حياتي فيها كل شيء اتغير للأجمل حبيبتي،
+      جيتي صرتي راحتي وضحكتي وأغلى حدا بحياتي،
+      وجودك بحياتي أغلى نعمة يروح قلبي 🥹❤️❤️  
+      <br><br>
+      كل عام وانتي بألف خير يحياتي، كل عام وانتي جمبي 🥹❤️❤️  
+      <br><br>
+      بحبك ❤️🥹  
+      <br><br>
+
+      From spending two beautiful years together, my heart,
+      to our second Valentine’s Day side by side, my soul,
+      from the first moment you entered my life, everything changed for the better, my love.
+      You became my peace, my smile, and the most precious person in my life.
+      Having you in my life is the greatest blessing I could ever have 🥹❤️❤️  
+      <br><br>
+      Happy Valentine’s Day, my love.  
+      Every year with you, every day beside you 🥹❤️❤️  
+      <br><br>
+      I love you ❤️🥹  
+      <br><br>
+      — Kerlos ❤️
+
+    </p>
+  </div>
+</div>
+
+<script>
+let attempts = 0;
+let musicInterval = null;
+
+function fadeInMusic(audio) {
+  audio.volume = 0;
+  audio.play().catch(()=>{});
+  let vol = 0;
+  musicInterval = setInterval(() => {
+    if (vol < 0.6) {
+      vol += 0.02;
+      audio.volume = vol;
+    } else {
+      clearInterval(musicInterval);
+    }
+  }, 150);
+}
+
+function checkPass() {
+  const pass = document.getElementById("pass").value;
+  const error = document.getElementById("error");
+  const hint = document.getElementById("hint");
+  const music = document.getElementById("music");
+
+  if (pass === "1910") {
+    document.getElementById("lock").classList.add("hidden");
+    document.getElementById("surprise").classList.remove("hidden");
+
+    fadeInMusic(music);
+
+    // Auto-scroll to top of surprise
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } else {
+    attempts++;
+    error.innerText = "❌ Wrong code… try again";
+    if (attempts >= 3) {
+      hint.classList.remove("hidden");
+    }
+  }
+}
+
+function showLetter() {
+  document.getElementById("letter").classList.remove("hidden");
+
+  // Auto scroll to letter
+  setTimeout(() => {
+    document.getElementById("letter").scrollIntoView({ behavior: "smooth" });
+  }, 300);
+}
+</script>
+
+</body>
+</html>
